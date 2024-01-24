@@ -232,7 +232,7 @@
   name:none,
   college:none,
   major:none,
-  teacher:none,
+  supervisor:none,
   date:datetime.today().display("[year].[month].[day]"),
   abstract:none,
   key_words:(),
@@ -246,11 +246,11 @@
     name:name,
     college:college,
     major:major,
-    teacher:teacher,
+    supervisor:supervisor,
     date:date
   )
 
-  set page(numbering: "I") //numbering setting must be before update()
+  set page(numbering: (..idx)=>{text(size:9pt,numbering("I",idx.pos().first()))})  //numbering setting must be before update()
   counter(page).update(1)
   
   zh_abstract_page(abstract,key_words)
