@@ -22,7 +22,7 @@
   仿宋: ("Times New Roman", "FangSong"),
   宋体: ("Times New Roman", "SimSun"),
   Noto宋体: ("Times New Roman", "Noto Serif SC"), //SimSun没有粗体，Noto有粗体
-  黑体: ("Times New Roman", "Noto Sans CJK"), //SimHei没有粗体
+  黑体: ("Times New Roman", "SimHei"),
   楷体: ("Times New Roman", "KaiTi"),
   代码: ("New Computer Modern Mono", "Times New Roman", "SimSun"),
 )
