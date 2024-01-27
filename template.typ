@@ -186,6 +186,12 @@
     set text(size:16pt,font:字体.黑体,weight: "bold")
     it
   }
+  show outline.entry: it => {
+    set text(size:字号.小四)
+    it.body
+    box(width:1fr,repeat[.])
+    it.page.at("child")
+  }
   outline(
     title:[
       = 目#h(2em)录#v(0.6em)
