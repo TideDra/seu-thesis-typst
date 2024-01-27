@@ -82,14 +82,16 @@
     set text(size:字号.三号,font:字体.黑体,weight:"bold")
     v(-0.5em)
     it
-    par()[#text(size:0.1cm)[#h(0.0em)]]
+    text()[#v(0em, weak: true)]
+    text()[#h(0em)]
     v(0.2em)
   }
   //节标题
   show heading.where(level:2):it=>{
     set text(size:字号.四号,font:字体.黑体,weight: "regular")
     it
-    par()[#text(size:0.65em)[#h(0.0em)]]
+    text()[#v(0em, weak: true)]
+    text()[#h(0em)]
   }
   //小节标题
   show heading.where(level:3):it=>{
@@ -126,6 +128,7 @@
 
   counter(page).update(1) //重置页码
   set par(leading: 行距,justify: true,first-line-indent: 2em) //1.5倍行距，两端对齐，首行缩进
+  show par: set block(spacing: 行距)
   
   show strong: it=>text(font: 字体.Noto宋体,weight: "bold")[#it] //粗体样式。 SimSun没有粗体，这里使用Noto Serif SC Bold作为宋体粗体
   doc

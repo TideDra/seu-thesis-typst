@@ -137,6 +137,7 @@
   
   set text(size: 12pt)
   set par(first-line-indent: 2em,justify: true,leading: 行距)
+  show par: set block(spacing: 行距)
   abstract
   
   v(1em)
@@ -164,6 +165,7 @@
   
   set text(size: 字号.小四,font:字体.宋体)
   set par(first-line-indent: 2em,justify: true,leading: 行距)
+  show par: set block(spacing: 行距)
   abstract
   
   v(2em)
