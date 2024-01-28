@@ -4,6 +4,8 @@
 #let midhline = hlinex(stroke:0.7pt)
 #let midvline = vlinex(stroke:0.5pt)
 
+#let part_state = state("part")
+
 //使用terms模拟latex的paragraph
 #let paragraph(content) = {
   set terms(hanging-indent: 0pt,indent:0pt)
@@ -20,6 +22,15 @@
   else{
     return counter(heading).at(loc).first()
   }
+})
+
+//获取用于显示的章节序号 
+#let get_chapter_idx_display(loc: none) = locate(cur_loc => {
+  let loc = if loc != none {loc} else {cur_loc}
+  let chapter_idx = counter(heading).at(loc).first()
+  let is_appendix = if part_state.at(loc) == "appendix" {true} else {false}
+
+  return numbering(if is_appendix {"A"} else {"1"}, chapter_idx)
 })
 
 //使用typst的画圈功能实现带圈数字
@@ -143,7 +154,7 @@
       return numbering("(a)",idx)
     }
     let separator = if kind==image{"-"} else{"."}
-    let chapter_idx = get_chapter_idx()
+    let chapter_idx = get_chapter_idx_display()
     if not continuous_index{
       return [#{chapter_idx}#separator#idx]
     }
@@ -194,7 +205,7 @@
       locate(loc=>{
         let parent_fig = query(figure.where(kind:image).before(subfig_loc),loc).last() //获得所在大图
         let parent_fig_idx = parent_fig.counter.at(subfig_loc).first() //获得大图序号
-        let chapter_idx = get_chapter_idx(loc:subfig_loc) //获得章节序号
+        let chapter_idx = get_chapter_idx_display(loc:subfig_loc) //获得章节序号
         return link(subfig_loc)[图#{chapter_idx}-#{parent_fig_idx}~(#it)] //子图引用格式:图2-1(a)
       })
     }
@@ -219,7 +230,7 @@
 #let set_doc_math(doc,continuous_index:false) = {
 
   set math.equation(numbering: idx=>{
-    let chapter_idx = get_chapter_idx()
+    let chapter_idx = get_chapter_idx_display()
     if not continuous_index{
       return [(#{chapter_idx}.#idx)] //按章节编号
     }
