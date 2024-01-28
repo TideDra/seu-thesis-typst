@@ -149,12 +149,12 @@
 #let set_doc_figure(doc,continuous_index:false) = {
 
   //子图使用(a)编号，图编号样式:2-1，表样式:2.1。可选择全文连续编号
-  let figure_numbering(idx,kind:none) = {
+  let figure_numbering(idx,kind:none,loc:none) = {
     if kind=="subfigure"{
       return numbering("(a)",idx)
     }
     let separator = if kind==image{"-"} else{"."}
-    let chapter_idx = get_chapter_idx_display()
+    let chapter_idx = get_chapter_idx_display(loc: loc)
     if not continuous_index{
       return [#{chapter_idx}#separator#idx]
     }
@@ -214,7 +214,7 @@
         let supplement = if el.kind==image{"图"} else{"表"}
         return link(el.location(),locate(loc=>{
           supplement
-          figure_numbering(..el.counter.at(el.location()),kind:el.kind) //图表引用格式同caption格式
+          figure_numbering(..el.counter.at(el.location()),kind:el.kind,loc:el.location()) //图表引用格式同caption格式
         }))
       }
       else{
