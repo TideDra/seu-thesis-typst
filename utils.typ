@@ -228,7 +228,17 @@
           }
         }))
       }
-      else{
+      else if el!=none and el.func() == math.equation {
+        if continuous_index {
+          return it
+        } else {
+          "公式 ("
+          get_chapter_idx_display(loc: el.location())
+          "."
+          str(counter(math.equation).at(el.location()).first())
+          ")"
+        }
+      } else {
         return it
       }
     }
