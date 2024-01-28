@@ -85,7 +85,7 @@
 }
 
 //设置各级标题格式
-#let set_doc_heading(doc) = {
+#let set_doc_heading(doc, continuous_index: false) = {
   //章标题
   show heading.where(level:1):it=>{
     pagebreak()
@@ -96,6 +96,11 @@
     text()[#v(0em, weak: true)]
     text()[#h(0em)]
     v(0.2em)
+
+    if not continuous_index {
+      counter(math.equation).update(0)
+      // 用于解决公式跨章节连续编号的问题
+    }
   }
   //节标题
   show heading.where(level:2):it=>{
@@ -214,7 +219,13 @@
         let supplement = if el.kind==image{"图"} else{"表"}
         return link(el.location(),locate(loc=>{
           supplement
-          figure_numbering(..el.counter.at(el.location()),kind:el.kind,loc:el.location()) //图表引用格式同caption格式
+          if continuous_index {
+            str(
+              figure_numbering(..el.counter.at(el.location()),kind:el.kind,loc:el.location()) //图表引用格式同caption格式
+            )
+          } else {
+            figure_numbering(..el.counter.at(el.location()),kind:el.kind,loc:el.location())
+          }
         }))
       }
       else{
@@ -235,7 +246,7 @@
       return [(#{chapter_idx}.#idx)] //按章节编号
     }
     else{
-      return idx
+      return [(#idx)]
     }
   })
   doc
@@ -244,7 +255,7 @@
 //统一设置正文格式
 #let set_doc(doc,continuous_index:false) = {
   let doc = set_doc_basic(doc)
-  let doc = set_doc_heading(doc)
+  let doc = set_doc_heading(doc, continuous_index:continuous_index)
   
   let doc = set_doc_figure(doc,continuous_index:continuous_index)
   let doc = set_doc_math(doc,continuous_index:continuous_index)
