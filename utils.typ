@@ -184,6 +184,7 @@
       counter(figure.where(kind:"subfigure")).update(0)
     }
     it
+    text()[#v(0em, weak: true)#h(0em)]
   }//每张大图中，子图重置编号
 
   //设置交叉引用样式
