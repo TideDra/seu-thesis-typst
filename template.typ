@@ -187,10 +187,12 @@
     it
   }
   show outline.entry: it => {
-    set text(size:字号.小四)
-    it.body
-    box(width:1fr,repeat[.])
-    it.page.at("child")
+    link(it.element.location())[
+      #set text(size:字号.小四)
+      #it.body
+      #box(width:1fr,repeat[.])
+      #it.page.at("child")
+    ]
   }
   outline(
     title:[
