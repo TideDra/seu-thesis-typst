@@ -4,6 +4,8 @@
 #let midhline = hlinex(stroke:0.7pt)
 #let midvline = vlinex(stroke:0.5pt)
 
+#let part_state = state("part")
+
 //使用terms模拟latex的paragraph
 #let paragraph(content) = {
   set terms(hanging-indent: 0pt,indent:0pt)
@@ -20,6 +22,15 @@
   else{
     return counter(heading).at(loc).first()
   }
+})
+
+//获取用于显示的章节序号 
+#let get_chapter_idx_display(loc: none) = locate(cur_loc => {
+  let loc = if loc != none {loc} else {cur_loc}
+  let chapter_idx = counter(heading).at(loc).first()
+  let is_appendix = if part_state.at(loc) == "appendix" {true} else {false}
+
+  return numbering(if is_appendix {"A"} else {"1"}, chapter_idx)
 })
 
 //使用typst的画圈功能实现带圈数字
@@ -74,7 +85,7 @@
 }
 
 //设置各级标题格式
-#let set_doc_heading(doc) = {
+#let set_doc_heading(doc, continuous_index: false) = {
   //章标题
   show heading.where(level:1):it=>{
     pagebreak()
@@ -85,6 +96,11 @@
     text()[#v(0em, weak: true)]
     text()[#h(0em)]
     v(0.2em)
+
+    if not continuous_index {
+      counter(math.equation).update(0)
+      // 用于解决公式跨章节连续编号的问题
+    }
   }
   //节标题
   show heading.where(level:2):it=>{
@@ -138,12 +154,12 @@
 #let set_doc_figure(doc,continuous_index:false) = {
 
   //子图使用(a)编号，图编号样式:2-1，表样式:2.1。可选择全文连续编号
-  let figure_numbering(idx,kind:none) = {
+  let figure_numbering(idx,kind:none,loc:none) = {
     if kind=="subfigure"{
       return numbering("(a)",idx)
     }
     let separator = if kind==image{"-"} else{"."}
-    let chapter_idx = get_chapter_idx()
+    let chapter_idx = get_chapter_idx_display(loc: loc)
     if not continuous_index{
       return [#{chapter_idx}#separator#idx]
     }
@@ -195,7 +211,7 @@
       locate(loc=>{
         let parent_fig = query(figure.where(kind:image).before(subfig_loc),loc).last() //获得所在大图
         let parent_fig_idx = parent_fig.counter.at(subfig_loc).first() //获得大图序号
-        let chapter_idx = get_chapter_idx(loc:subfig_loc) //获得章节序号
+        let chapter_idx = get_chapter_idx_display(loc:subfig_loc) //获得章节序号
         return link(subfig_loc)[图#{chapter_idx}-#{parent_fig_idx}~(#it)] //子图引用格式:图2-1(a)
       })
     }
@@ -204,10 +220,26 @@
         let supplement = if el.kind==image{"图"} else{"表"}
         return link(el.location(),locate(loc=>{
           supplement
-          figure_numbering(..el.counter.at(el.location()),kind:el.kind) //图表引用格式同caption格式
+          if continuous_index {
+            str(
+              figure_numbering(..el.counter.at(el.location()),kind:el.kind,loc:el.location()) //图表引用格式同caption格式
+            )
+          } else {
+            figure_numbering(..el.counter.at(el.location()),kind:el.kind,loc:el.location())
+          }
         }))
       }
-      else{
+      else if el!=none and el.func() == math.equation {
+        if continuous_index {
+          return it
+        } else {
+          "公式 ("
+          get_chapter_idx_display(loc: el.location())
+          "."
+          str(counter(math.equation).at(el.location()).first())
+          ")"
+        }
+      } else {
         return it
       }
     }
@@ -220,12 +252,12 @@
 #let set_doc_math(doc,continuous_index:false) = {
 
   set math.equation(numbering: idx=>{
-    let chapter_idx = get_chapter_idx()
+    let chapter_idx = get_chapter_idx_display()
     if not continuous_index{
       return [(#{chapter_idx}.#idx)] //按章节编号
     }
     else{
-      return idx
+      return [(#idx)]
     }
   })
   doc
@@ -234,7 +266,7 @@
 //统一设置正文格式
 #let set_doc(doc,continuous_index:false) = {
   let doc = set_doc_basic(doc)
-  let doc = set_doc_heading(doc)
+  let doc = set_doc_heading(doc, continuous_index:continuous_index)
   
   let doc = set_doc_figure(doc,continuous_index:continuous_index)
   let doc = set_doc_math(doc,continuous_index:continuous_index)

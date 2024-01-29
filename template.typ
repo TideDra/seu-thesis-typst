@@ -1,5 +1,5 @@
 #import "constants.typ":字体,字号,行距
-#import "utils.typ":set_doc,set_doc_footnote
+#import "utils.typ":set_doc,set_doc_footnote,part_state
 
 //论文翻译封面
 #let translation_cover(
@@ -194,15 +194,15 @@
       #it.page.at("child")
     ]
   }
+  heading(level: 1, bookmarked: true, outlined: true)[目#h(2em)录]
+  v(0.6em)
   outline(
-    title:[
-      = 目#h(2em)录#v(0.6em)
-    ],
-    indent:2em
+    title: none,
+    indent: 2em,
+    depth: 3,
   )
   set par(first-line-indent: 2em)
-  place(top,hide([= 目#h(2em)录])) // hack outline cannot outline itself
-  
+
 }
 
 //参考文献页
@@ -215,6 +215,7 @@
 
 #let appendix(doc) = {
   counter(heading).update(0)
+  part_state.update("appendix")
   set heading(numbering: (..nums)=>{
     let nums_array = nums.pos()
     if nums_array.len()==1{
