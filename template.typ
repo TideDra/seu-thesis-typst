@@ -68,8 +68,9 @@
     columns:(2.2cm,1fr),
     gutter: 18pt,
     [题#h(0.5em)目: ],block(stroke: (bottom:0.5pt),outset: (bottom:6pt,x:8pt))[
-
-      #underline(stroke: 0.5pt,offset: 6pt,extent:8pt,title)
+      #par(leading: 30pt)[
+        #underline(stroke: 0.5pt,offset: 6pt,extent:8pt,title)
+      ]
     ]
   )
   v(2cm)
