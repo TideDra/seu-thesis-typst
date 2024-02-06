@@ -72,3 +72,6 @@
 
 # 参考项目
  - [PKUTHSS-Typst](https://github.com/lucifer1004/pkuthss-typst)
+
+# 相关项目
+ - [SEU-Typst-Template](https://github.com/csimide/SEU-Typst-Template) 提供了更多学位论文模板
