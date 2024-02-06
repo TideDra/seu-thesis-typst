@@ -58,9 +58,11 @@
   set page(paper: "a4",margin:(right:2.4cm,left:2.4cm,top:2cm,bottom:2cm))
 
   set align(center)
-  v(2cm)
-  image("figures/bachelor_cover_logo.png",width:11.9cm)
-  v(2cm)
+  v(1.2cm)
+  image("figures/logo.png",width:10cm)
+  v(-0.53cm)
+  text(font:字体.黑体,size:字号.一号,weight: "bold")[本科毕业设计（论文）报告]
+  v(2.07cm)
   
   set text(font:字体.黑体,size:22pt)
   
@@ -73,7 +75,7 @@
       ]
     ]
   )
-  v(2cm)
+  v(1.8cm)
   set par(justify: true)
   set text(font:字体.宋体,size:18pt)
 
@@ -94,7 +96,7 @@
 #let claim_page() = {
   set page(paper: "a4",margin:(x:2.3cm,top:2cm,bottom:2cm))
   set align(center)
-  v(2.6cm)
+  v(1.7cm)
   text(font:字体.黑体,size:18pt)[东南大学毕业（设计）论文独创性声明]
   v(0.8cm)
   set align(left)
@@ -106,7 +108,7 @@
 
   v(3.5cm)
   set align(center)
-  v(1.8cm)
+  v(1.3cm)
   text(font:字体.黑体,size:18pt)[东南大学毕业（设计）论文使用授权声明]
   v(0.5cm)
   set align(left)
@@ -152,7 +154,7 @@
 #let en_abstract_page(abstract,key_words) = {
   pagebreak()
   set page(paper: "a4",
-          margin:(top:3cm,x:2.5cm,bottom:3.8cm)
+          margin:(top:2.55cm,x:2.5cm,bottom:3.8cm)
           )
   show heading.where(level:1):it=>{
     set align(center)
@@ -178,7 +180,7 @@
 #let outline_page() = {
   pagebreak()
   set page(paper: "a4",
-          margin:(top:3cm,x:2.5cm,bottom:3.8cm)
+          margin:(top:2.6cm,x:2.5cm,bottom:3.8cm)
           )
   set text(size: 12pt,font:字体.宋体,lang: "zh", region: "cn")
   set par(leading: 12pt,justify: true)

@@ -27,4 +27,4 @@
   代码: ("New Computer Modern Mono", "Times New Roman", "SimSun"),
 )
 
-#let 行距 = 14pt
+#let 行距 = 14.2pt

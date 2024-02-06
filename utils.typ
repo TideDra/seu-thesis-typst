@@ -108,6 +108,7 @@
     it
     text()[#v(0em, weak: true)]
     text()[#h(0em)]
+    v(0.2em)
   }
   //小节标题
   show heading.where(level:3):it=>{
