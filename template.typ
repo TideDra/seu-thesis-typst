@@ -57,6 +57,11 @@
 ) = {
   set page(paper: "a4",margin:(right:2.4cm,left:2.4cm,top:2cm,bottom:2cm))
 
+  show text.where(weight: "bold").or(strong): it => {
+    show regex("\p{script=Han}"): set text(weight: "regular", stroke: 0.02857em)
+    it
+  }
+
   set align(center)
   v(1.2cm)
   image("figures/logo.png",width:10cm)
@@ -135,6 +140,10 @@
     par()[#text(size:0.5em)[#h(0.0em)]]
     v(0.2em)
   }
+  show text.where(weight: "bold").or(strong): it => {
+    show regex("\p{script=Han}"): set text(weight: "regular", stroke: 0.02857em)
+    it
+  }
   set heading(numbering: none)
   [= 摘#h(2em)要]
   
@@ -163,6 +172,10 @@
     par()[#text(size:0.5em)[#h(0.0em)]]
     v(0.2em)
   }
+  show text.where(weight: "bold").or(strong): it => {
+    show regex("\p{script=Han}"): set text(weight: "regular", stroke: 0.02857em)
+    it
+  }
   set heading(numbering: none)
   [= ABSTRACT]
   
@@ -187,6 +200,10 @@
   show heading.where(level:1):it=>{
     set align(center)
     set text(size:16pt,font:字体.黑体,weight: "bold")
+    it
+  }
+  show text.where(weight: "bold").or(strong): it => {
+    show regex("\p{script=Han}"): set text(weight: "regular", stroke: 0.02857em)
     it
   }
   show outline.entry: it => {

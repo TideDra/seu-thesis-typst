@@ -84,6 +84,15 @@
   doc
 }
 
+// 设置粗体格式，中文使用伪粗体代替真粗体
+#let set_cn_bold(doc) = {
+  show text.where(weight: "bold").or(strong): it => {
+    show regex("\p{script=Han}"): set text(weight: "regular", stroke: 0.02857em)
+    it
+  }
+  doc
+}
+
 //设置各级标题格式
 #let set_doc_heading(doc, continuous_index: false) = {
   //章标题
@@ -147,7 +156,7 @@
   set par(leading: 行距,justify: true,first-line-indent: 2em) //1.5倍行距，两端对齐，首行缩进
   show par: set block(spacing: 行距)
   
-  show strong: it=>text(font: 字体.Noto宋体,weight: "bold")[#it] //粗体样式。 SimSun没有粗体，这里使用Noto Serif SC Bold作为宋体粗体
+  show strong: it=>text(font: 字体.宋体, weight: "bold")[#it] //粗体样式。
   doc
 }
 
@@ -268,6 +277,7 @@
 #let set_doc(doc,continuous_index:false) = {
   let doc = set_doc_basic(doc)
   let doc = set_doc_heading(doc, continuous_index:continuous_index)
+  let doc = set_cn_bold(doc)
   
   let doc = set_doc_figure(doc,continuous_index:continuous_index)
   let doc = set_doc_math(doc,continuous_index:continuous_index)
