@@ -1,6 +1,7 @@
 #import "constants.typ":字体,字号,行距
 #import "@preview/a2c-nums:0.0.1": int-to-cn-num
 #import "@preview/tablex:0.0.8": tablex,vlinex,hlinex,colspanx,rowspanx
+#import "@preview/cuti:0.2.0": show-cn-fakebold
 #let midhline = hlinex(stroke:0.7pt)
 #let midvline = vlinex(stroke:0.5pt)
 
@@ -86,10 +87,7 @@
 
 // 设置粗体格式，中文使用伪粗体代替真粗体
 #let set_cn_bold(doc) = {
-  show text.where(weight: "bold").or(strong): it => {
-    show regex("\p{script=Han}"): set text(weight: "regular", stroke: 0.02857em)
-    it
-  }
+  show: show-cn-fakebold
   doc
 }
 

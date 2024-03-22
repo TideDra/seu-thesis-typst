@@ -1,5 +1,6 @@
 #import "constants.typ":字体,字号,行距
 #import "utils.typ":set_doc,set_doc_footnote,part_state
+#import "@preview/cuti:0.2.0": show-cn-fakebold
 
 //论文翻译封面
 #let translation_cover(
@@ -57,10 +58,7 @@
 ) = {
   set page(paper: "a4",margin:(right:2.4cm,left:2.4cm,top:2cm,bottom:2cm))
 
-  show text.where(weight: "bold").or(strong): it => {
-    show regex("\p{script=Han}"): set text(weight: "regular", stroke: 0.02857em)
-    it
-  }
+  show: show-cn-fakebold
 
   set align(center)
   v(1.2cm)
@@ -140,10 +138,7 @@
     par()[#text(size:0.5em)[#h(0.0em)]]
     v(0.2em)
   }
-  show text.where(weight: "bold").or(strong): it => {
-    show regex("\p{script=Han}"): set text(weight: "regular", stroke: 0.02857em)
-    it
-  }
+  show: show-cn-fakebold
   set heading(numbering: none)
   [= 摘#h(2em)要]
   
@@ -172,10 +167,7 @@
     par()[#text(size:0.5em)[#h(0.0em)]]
     v(0.2em)
   }
-  show text.where(weight: "bold").or(strong): it => {
-    show regex("\p{script=Han}"): set text(weight: "regular", stroke: 0.02857em)
-    it
-  }
+  show: show-cn-fakebold
   set heading(numbering: none)
   [= ABSTRACT]
   
@@ -202,10 +194,7 @@
     set text(size:16pt,font:字体.黑体,weight: "bold")
     it
   }
-  show text.where(weight: "bold").or(strong): it => {
-    show regex("\p{script=Han}"): set text(weight: "regular", stroke: 0.02857em)
-    it
-  }
+  show: show-cn-fakebold
   show outline.entry: it => {
     link(it.element.location())[
       #set text(size:字号.小四)
