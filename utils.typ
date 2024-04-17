@@ -121,6 +121,9 @@
   show heading.where(level:3):it=>{
     set text(size:字号.小四,font:字体.宋体)
     it
+    text()[#v(0em, weak: true)]
+    text()[#h(0em)]
+    v(0em)
   }
   
   set heading(numbering: (..nums)=>{
