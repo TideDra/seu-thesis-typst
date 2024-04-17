@@ -1,9 +1,6 @@
 #import "constants.typ":字体,字号,行距
 #import "@preview/a2c-nums:0.0.1": int-to-cn-num
-#import "@preview/tablex:0.0.8": tablex,vlinex,hlinex,colspanx,rowspanx
 #import "@preview/cuti:0.2.0": show-cn-fakebold
-#let midhline = hlinex(stroke:0.7pt)
-#let midvline = vlinex(stroke:0.5pt)
 
 #let part_state = state("part")
 

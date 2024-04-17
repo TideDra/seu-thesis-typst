@@ -96,86 +96,78 @@
 
 //tablex详细用法参见文档 https://github.com/typst/packages/tree/main/packages/preview/tablex/0.0.8
 #figure(
-  tablex(
-    auto-lines:false,
+  table(
     columns:cycle((1fr,),3), //三列，等宽
     rows:1.8em, //行高
-    stroke:1pt, //线宽
+    stroke:none, //线宽
     align:center+horizon,
-    hlinex(),
+    table.hline(),
     [降水率(mm/h)分级],[该等级所占比例(%)],[降水等级描述],
-    hlinex(),
+    table.hline(),
     [$0 lt.eq x lt 0.5$],[90.36],[没有雨或雨很小],
     [$0.5 lt.eq x lt 2.0$],[6.41],[小雨],
     [$2.0 lt.eq x lt 5.0$],[2.04],[中雨],
     [$5.0 lt.eq x lt 10.0$],[0.10],[大雨],
     [$10.0 lt.eq x lt 30.0$],[0.73],[大雨到暴雨],
     [$30.0 lt.eq x lt 100.0$],[0.16],[暴雨],
-    hlinex()
+    table.hline()
   ),
-  kind:table, //figure暂时无法自动识别tablex种类，需手动指定为table
   caption: [降水率分级统计]
 )<tab:rain_rate>
 
 #figure(
-  tablex(
-    auto-lines:false,
+  table(
     columns:cycle((1fr,),13), //13列，等宽
     rows:2em,
-    stroke:1pt,
-    repeat-header:true, //换页时重复表头
-    header-rows:2, //表头行数
+    stroke:none,
     align:center+horizon,
-    hlinex(),
-    [],colspanx(4)[Stage 1 (>7.1 μm)],(),(),(),colspanx(4)[Stage 2 (4.8-7.1 μm)],(),(),(),colspanx(4)[Stage 3 (3.2-4.7 μm)],(),(),(),
-    hlinex(),
+    table.hline(),
+    [],table.cell(colspan:4,[Stage 1 (>7.1 μm)]),table.cell(colspan:4,[Stage 2 (4.8-7.1 μm)]),table.cell(colspan:4,[Stage 3 (3.2-4.7 μm)]),
+    table.hline(),
     [],[Con],[Low],[Medium],[High],[Con],[Low],[Medium],[High],[Con],[Low],[Medium],[High],
-    hlinex(),
+    table.hline(),
     [H],[2.52],[2.58],[2.57],[2.24],[2.48],[2.21],[2.21],[2.36],[2.66],[2.65],[2.64],[2.53],
     [E],[2.52],[2.58],[2.57],[2.24],[2.48],[2.21],[2.21],[2.36],[2.66],[2.65],[2.64],[2.53],
-    hlinex()
+    table.hline()
   ),
   kind:table,
   caption: [室外细菌气溶胶香农-维纳指数（H）和均匀性指数（E）]
 )
 
 #figure(
-  tablex(
-    auto-lines:false,
+  table(
     columns:cycle((2.4cm,),5), //五列，列宽2.4cm
     rows:2em,
-    stroke:1pt,
+    stroke:none,
     align:center+horizon,
-    hlinex(),
+    table.hline(),
     [产品],[产量],[销量],[产值],[比重],
-    hlinex(),
+    table.hline(),
     [手机],[11000],[10000],[500],[50%],
     [手机],[11000],[10000],[500],[50%],
     [手机],[11000],[10000],[500],[50%],
-    hlinex(),
+    table.hline(),
     [合计],[33000],[30000],[1500],[150%],
-    hlinex()
+    table.hline()
   ),
-  kind:table,
   caption: [统计表]
 )
 
 #figure(
-  tablex(
-    auto-lines:false,
+  table(
     columns:cycle((2.4cm,),5),
     rows:2em,
-    stroke:1pt,
+    stroke:none,
     align:center+horizon,
-    hlinex(),
+    table.hline(),
     [年度],[产品],[产量],[销量],[产值],
-    hlinex(),
-    rowspanx(2)[2004],[手机],[11000],[10000],[500],
-    (),              [计算机],[1100],[1000],[280],
-    hlinex(),
-    rowspanx(2)[2004],[手机],[11000],[10000],[500],
-    (),              [计算机],[1100],[1000],[280],
-    hlinex()
+    table.hline(),
+    table.cell(rowspan:2,[2004]),[手机],[11000],[10000],[500],
+                  [计算机],[1100],[1000],[280],
+    table.hline(),
+    table.cell(rowspan:2,[2004]),[手机],[11000],[10000],[500],
+                  [计算机],[1100],[1000],[280],
+    table.hline()
   ),
   kind:table,
   caption: [统计表]
