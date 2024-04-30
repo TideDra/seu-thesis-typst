@@ -70,17 +70,19 @@
   text(font: 字体.黑体, size: 字号.一号, weight: "bold")[本科毕业设计（论文）报告]
   v(2.07cm)
 
+  let title_array() = {
+    if type(title)!=array {return (title,)}
+    else {return title}
+  }
   set text(font: 字体.黑体, size: 22pt)
-
+  let underline_entire_line(doc) = {
+    box(width:100%,stroke: (bottom: 0.5pt), outset: (bottom: 6pt, x: 8pt),underline(stroke: 0.5pt,offset: 6pt,extent:8pt)[#doc])
+  }
   grid(
     columns: (2.2cm, 1fr),
     gutter: 18pt,
     [题#h(0.5em)目: ],
-    block(stroke: (bottom: 0.5pt), outset: (bottom: 6pt, x: 8pt))[
-      #par(leading: 30pt)[
-        #underline(stroke: 0.5pt, offset: 6pt, extent: 8pt, title)
-      ]
-    ],
+    par(leading: 30pt,title_array().map(underline_entire_line).join())
   )
   v(1.8cm)
   set par(justify: true)

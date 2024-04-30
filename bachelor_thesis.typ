@@ -7,7 +7,7 @@
 #show: doc => set_doc_footnote(doc)
 
 #let info = (
-  title: [基于四十二号混凝土的意大利面配料方案研究],
+  title: [基于四十二号混凝土的意大利面配料方案研究],//("基于四十二号混凝土的意大利面配料方","案研究")
   student_id: [12345678],
   name: [张三],
   college: [霍格沃兹学院],
