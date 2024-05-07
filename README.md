@@ -76,6 +76,8 @@
 
 - Typst 目前暂不支持插入 PDF。矢量图请保存为 SVG 格式，或将 PDF 转为 SVG。
 
+- 本科毕设模板目前采用[SEU-Typst-Template](https://github.com/csimide/SEU-Typst-Template)提供的`gb-t-7714-2015-numeric-seu-bachelor.csl`作为参考文献格式。该格式已尽量复刻官方Word模板中的格式，但仍有差异。详情请移步至原项目仓库查看。
+
 # 参考项目
 
 - [PKUTHSS-Typst](https://github.com/lucifer1004/pkuthss-typst)

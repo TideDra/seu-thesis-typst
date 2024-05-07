@@ -242,7 +242,7 @@
   set text(size: 字号.五号, font: 字体.宋体, lang: "en")
   set par(justify: true)
 
-  bibliography(bib_file, style: "gb-7714-2015-numeric", title: [参考文献])
+  bibliography(bib_file, style: "gb-t-7714-2015-numeric-seu-bachelor.csl", title: [参考文献])
 }
 
 #let appendix(doc) = {
