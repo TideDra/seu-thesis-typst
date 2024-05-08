@@ -154,7 +154,7 @@
   set page(
     paper: "a4",
     header: [
-      #set text(9pt)
+      #set text(9pt,weight: "regular")
       #set align(center)
       东南大学本科毕业设计（论文）
       #place(line(length: 100%, stroke: 0.7pt), dy: 5pt)
