@@ -120,7 +120,10 @@
 }
 
 // 论文声明页
-#let claim_page() = {
+#let claim_page(year:none,month:none,day:none) = {
+  let year = {set align(center);year}
+  let month = {set align(center);month}
+  let day = {set align(center);day}
   set page(paper: "a4", margin: (x: 2.3cm, top: 2cm, bottom: 2cm))
   set align(center)
   v(1.7cm)
@@ -129,9 +132,10 @@
   set align(left)
   set par(first-line-indent: 2em, justify: true, leading: 11.83pt)
   set text(font: 字体.宋体, size: 12pt)
+
   [本人声明所呈交的毕业（设计）论文是我个人在导师指导下进行的研究工作及取得的研究成果。尽我所知，除了文中特别加以标注和致谢的地方外，论文中不包含其他人已经发表或撰写过的研究成果，也不包含为获得东南大学或其它教育机构的学位或证书而使用过的材料。与我一同工作的同志对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。]
   par()[#v(1em)]
-  [#h(2em)论文作者签名：#box(width: 8em, stroke: (bottom: 0.5pt), outset: 2pt)#h(1.5em)日期：#box(width: 3.5em, stroke: (bottom: 0.5pt), outset: 2pt)年#box(width: 2.5em, stroke: (bottom: 0.5pt), outset: 2pt)月#box(width: 2.5em, stroke: (bottom: 0.5pt), outset: 2pt)日]
+  [#h(2em)论文作者签名：#box(width: 8em, stroke: (bottom: 0.5pt), outset: 2pt)#h(1.5em)日期：#box(year,width: 3.5em, stroke: (bottom: 0.5pt), outset: 2pt)年#box(month,width: 2.5em, stroke: (bottom: 0.5pt), outset: 2pt)月#box(day,width: 2.5em, stroke: (bottom: 0.5pt), outset: 2pt)日]
 
   v(3.5cm)
   set align(center)
@@ -145,7 +149,7 @@
 
   par()[#v(1em)]
   [论文作者签名：#box(width: 9.5em, stroke: (bottom: 0.5pt), outset: 2pt)#h(2em)导师签名：#box(width: 11.5em, stroke: (bottom: 0.5pt), outset: 2pt)#h(1.5em)\
-    #h(2em)日期：#box(width: 3.5em, stroke: (bottom: 0.5pt), outset: 2pt)年#box(width: 2.5em, stroke: (bottom: 0.5pt), outset: 2pt)月#box(width: 2.5em, stroke: (bottom: 0.5pt), outset: 2pt)日#h(4em)日期：#box(width: 3.5em, stroke: (bottom: 0.5pt), outset: 2pt)年#box(width: 2.5em, stroke: (bottom: 0.5pt), outset: 2pt)月#box(width: 2.5em, stroke: (bottom: 0.5pt), outset: 2pt)日]
+    #h(2em)日期：#box(year,width: 3.5em, stroke: (bottom: 0.5pt), outset: 2pt)年#box(month,width: 2.5em, stroke: (bottom: 0.5pt), outset: 2pt)月#box(day,width: 2.5em, stroke: (bottom: 0.5pt), outset: 2pt)日#h(4em)日期：#box(year,width: 3.5em, stroke: (bottom: 0.5pt), outset: 2pt)年#box(month,width: 2.5em, stroke: (bottom: 0.5pt), outset: 2pt)月#box(day,width: 2.5em, stroke: (bottom: 0.5pt), outset: 2pt)日]
 }
 
 // 中文摘要页
@@ -314,6 +318,7 @@
   major: none,
   supervisor: none,
   duration: none,
+  sign_date:(none,none,none),
   zh_abstract: none,
   zh_key_words: (),
   en_abstract: none,
@@ -331,7 +336,7 @@
     duration: duration,
   )
 
-  claim_page()
+  claim_page(year:sign_date.at(0),month:sign_date.at(1),day:sign_date.at(2))
 
   // numbering setting must be before update()。正文前用罗马数字编号。
   set page(numbering: (..idx) => {
