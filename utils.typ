@@ -102,7 +102,8 @@
 
 // 设置各级标题格式
 #let set_doc_heading(doc, continuous_index: false) = {
-  // 章标题
+  // 章标题（没有supplement）
+  show heading.where(level: 1): set heading(supplement: none)
   show heading.where(level: 1): it => {
     pagebreak()
     set align(center)
@@ -154,7 +155,7 @@
   set page(
     paper: "a4",
     header: [
-      #set text(9pt,weight: "regular")
+      #set text(9pt, weight: "regular")
       #set align(center)
       东南大学本科毕业设计（论文）
       #place(line(length: 100%, stroke: 0.7pt), dy: 5pt)
@@ -277,11 +278,17 @@
       if continuous_index {
         it
       } else {
-        "公式 ("
-        get_chapter_idx_display(loc: el_loc)
-        "."
-        str(counter(math.equation).at(el_loc).first())
-        ")"
+        link(
+          el.location(),
+          {
+            "公式 ("
+            get_chapter_idx_display(loc: el_loc)
+            "."
+            str(counter(math.equation).at(el_loc).first())
+            ")"
+          },
+        )
+
       }
     } else {
       it
