@@ -278,11 +278,17 @@
       if continuous_index {
         it
       } else {
-        "公式 ("
-        get_chapter_idx_display(loc: el_loc)
-        "."
-        str(counter(math.equation).at(el_loc).first())
-        ")"
+        link(
+          el.location(),
+          {
+            "公式 ("
+            get_chapter_idx_display(loc: el_loc)
+            "."
+            str(counter(math.equation).at(el_loc).first())
+            ")"
+          },
+        )
+
       }
     } else {
       it
