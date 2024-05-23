@@ -68,6 +68,7 @@
   kind: "subfigure",
   supplement: none,
   numbering: "(a)",
+  placement: none,
 )
 
 // 设置脚注格式。该函数必须在文档开头调用。
